@@ -67,3 +67,12 @@ function insertLetter (pressedKey) {
   currentGuess.push(pressedKey)
   nextLetter += 1
 }
+
+function deleteLetter () {
+  let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+  let box = row.children[nextLetter - 1]
+  box.textContent = ""
+  box.classList.remove("filled-box")
+  currentGuess.pop()
+  nextLetter -= 1
+}
