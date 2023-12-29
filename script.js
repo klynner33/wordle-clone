@@ -87,61 +87,62 @@ function checkGuess () {
   }
 
   if (guessString.length != 5) {
-      alert("Not enough letters!")
+      toastr.error("Not enough letters!")
       return
   }
 
   if (!WORDS.includes(guessString)) {
-      alert("Word not in list!")
+      toastr.error("Word not in list!")
       return
   }
 
+  
   for (let i = 0; i < 5; i++) {
-    let letterColor = ''
-    let box = row.children[i]
-    let letter = currentGuess[i]
-    
-    let letterPosition = rightGuess.indexOf(currentGuess[i])
-    // is letter in the correct guess
-    if (letterPosition === -1) {
-        letterColor = 'grey'
-    } else {
-        // now, letter is definitely in word
-        // if letter index and right guess index are the same
-        // letter is in the right position 
-        if (currentGuess[i] === rightGuess[i]) {
-            // shade green 
-            letterColor = 'green'
-        } else {
-            // shade box yellow
-            letterColor = 'yellow'
-        }
+      let letterColor = ''
+      let box = row.children[i]
+      let letter = currentGuess[i]
+      
+      let letterPosition = rightGuess.indexOf(currentGuess[i])
+      // is letter in the correct guess
+      if (letterPosition === -1) {
+          letterColor = 'grey'
+      } else {
+          // now, letter is definitely in word
+          // if letter index and right guess index are the same
+          // letter is in the right position 
+          if (currentGuess[i] === rightGuess[i]) {
+              // shade green 
+              letterColor = 'green'
+          } else {
+              // shade box yellow
+              letterColor = 'yellow'
+          }
 
-        rightGuess[letterPosition] = "#"
-    }
+          rightGuess[letterPosition] = "#"
+      }
 
-    let delay = 250 * i
-    setTimeout(()=> {
-        //shade box
-        box.style.backgroundColor = letterColor
-        shadeKeyBoard(letter, letterColor)
-    }, delay)
-}
+      let delay = 250 * i
+      setTimeout(()=> {
+          //shade box
+          box.style.backgroundColor = letterColor
+          shadeKeyBoard(letter, letterColor)
+      }, delay)
+  }
 
-if (guessString === rightGuessString) {
-    alert("You guessed right! Game over!")
-    guessesRemaining = 0
-    return
-} else {
-    guessesRemaining -= 1;
-    currentGuess = [];
-    nextLetter = 0;
+  if (guessString === rightGuessString) {
+      toastr.success("You guessed right! Game over!")
+      guessesRemaining = 0
+      return
+  } else {
+      guessesRemaining -= 1;
+      currentGuess = [];
+      nextLetter = 0;
 
-    if (guessesRemaining === 0) {
-        alert("You've run out of guesses! Game over!")
-        alert(`The right word was: "${rightGuessString}"`)
-    }
-}
+      if (guessesRemaining === 0) {
+          toastr.error("You've run out of guesses! Game over!")
+          toastr.info(`The right word was: "${rightGuessString}"`)
+      }
+  }
 }
 
 function shadeKeyBoard(letter, color) {
