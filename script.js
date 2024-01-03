@@ -62,6 +62,7 @@ function insertLetter (pressedKey) {
 
   let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
   let box = row.children[nextLetter]
+  animateCSS(box, "pulse")
   box.textContent = pressedKey
   box.classList.add("filled-box")
   currentGuess.push(pressedKey)
