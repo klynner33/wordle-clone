@@ -124,9 +124,11 @@ function checkGuess () {
 
       let delay = 250 * i
       setTimeout(()=> {
-          //shade box
-          box.style.backgroundColor = letterColor
-          shadeKeyBoard(letter, letterColor)
+        //flip box
+        animateCSS(box, 'flipInX')
+        //shade box
+        box.style.backgroundColor = letterColor
+       shadeKeyBoard(letter, letterColor)
       }, delay)
   }
 
